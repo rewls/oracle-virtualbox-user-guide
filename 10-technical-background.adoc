@@ -1,0 +1,76 @@
+= 10 Technical Background
+
+* This chapter provides additional information for readers who are familiar
+  with computer architecture and technology and want to find out more about how
+  Oracle VirtualBox works under the hood.
+* The contents of this chapter are not required reading in order to use Oracle
+  VirtualBox successfully.
+
+== 10.1 Where Oracle VirtualBox Stores its Files
+
+* In Oracle VirtualBox, a virtual machine and its settings are described in a
+  virtual machine settings file in XML format.
+* In addition, most virtual machines have one or more virtual hard disks.
+* These are typically represented by disk images, such as those in VDI format.
+* The location of these files may vary, depending on the host operating system.
+* See _10.1.1 The Machine Folder_.
+
+'''
+
+* Global configuration data for Oracle VirtualBox is maintained in another
+  location on the host.
+* See _10.1.2 Global Settings_.
+
+=== 10.1.1 The Machine Folder
+
+* By default, each virtual machine has a directory on your host computer where
+  all the files of that machine are stored: the XML settings file, with a
+  `.vbox` file extension, and its disk images.
+* This is called the _machine folder_.
+* By default, this machine folder is located in a common folder called
+  `VirtualBox VMs`, which Oracle VirtualBox creates in the current system user's
+  home directory.
+* The location of this home directory depends on the conventions of the host
+  operating system, as follows:
+** On Linux, macOS, and Oracle Solaris, this is generally taken from the
+   environment variable `$HOME`, except for the user `root` where it is taken
+   from the account database.
+*** This is a workaround for the frequent trouble caused by users using Oracle
+	VirtualBox in combination with the tool `sudo`, which by default does not
+    reset the environment variable `$HOME`.
++
+'''
+*** A typical location on Linux and Oracle Solaris is `/home/_username_` and on
+	macOS is `/Users/_username_`.
+
+'''
+
+* For simplicity, we abbreviate the location of the home directory as `$HOME`.
+* Using that convention, the common folder for all virtual machines is
+  `$HOME/VirtualBox VMs`.
+
+'''
+
+* As an example, when you create a virtual machine called _Example VM_, Oracle
+  VirtualBox creates the following:
+** A machine folder: `$HOME/VirtualBox VMs/Example VM/`
+** In the machine folder, a settings file: `Example VM.vbox`
+** In the machine folder, a virtual disk image: `Example VM.vdi`.
+
+'''
+
+* This is the default layout if you use the *Create New Virtual Machine* wizard
+  described in _1.9 Creating a Virtual Machine_.
+* Once you start working with the VM, additional files are added.
+* Log files are in a subfolder called `Logs`, and if you have taken snapshots,
+  they are in a `Snapshots` subfolder.
+* For each VM, you can change the location of its snapshots folder in the VM
+  settings.
+
+'''
+
+* You can change the default machine folder by selecting *Preferences* from the
+  *File* menu in the Oracle VirtualBox main window.
+* Then, in the displayed window, click the *General* tab.
+* Alternatively, use the `VBoxManage setproperty machinefolder` command.
+* See _VBoxManage setproperty_.
