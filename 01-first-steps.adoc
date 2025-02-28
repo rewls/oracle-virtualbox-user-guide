@@ -1,0 +1,438 @@
+= 1 First Steps
+:toc: left
+
+* Oracle VirtualBox is a cross-platform virtualization application.
+* That means it extends the capabilities of your existing computer so that it
+  can run multiple operating systems, inside multiple virtual machines (VMs),
+  at the same time.
+* You can install and run as many virtual machines as you like.
+* The only practical limits are disk space and memory.
+
+'''
+
+* Oracle VirtualBox is deceptively simple yet also very powerful.
+* It can run everywhere from small embedded systems or desktop class machines
+  all the way up to data center deployments and even Cloud environments.
+* In this User Guide, we will begin simply with a quick introduction to
+  virtualization and how to get your first virtual machine running with the
+  easy-to-use Oracle VirtualBox graphical user interface.
+* Subsequent chapters will go into much more detail covering more powerful
+  tools and features, but fortunately, it is not necessary to read the entire
+  User Guide before you can use Oracle VirtualBox.
+
+== 1.1 Why is Virtualization Useful?
+
+* The techniques and features that Oracle VirtualBox provides are useful in the
+  following scenarios:
+Running multiple operating systems simultaneously.::
+** Oracle VirtualBox enables you to run more than one OS at a time.
+** This way, you can run software written for one OS on another, such as
+   Windows software on Linux or a Mac, without having to reboot to use it.
+** Since you can configure what kinds of virtual hardware should be presented
+   to each such OS, you can install an old OS such as DOS or OS/2 even if your
+   real computer's hardware is no longer supported by that OS.
+Easier software installations.::
+** Software vendors can use virtual machines to ship entire software
+   configurations.
+** For example, installing a complete mail server solution on a real machine
+   can be a tedious task.
+** With Oracle VirtualBox, such a complex setup, often called an appliance, can
+   be packed into a virtual machine.
+** Installing and running a mail server becomes as easy as importing such an
+   appliance into Oracle VirtualBox
+Testing and disaster recovery::
+** Once installed, a virtual machine and its virtual hard disks can be
+   considered a container that can be arbitrarily frozen, woken up, copied, backed
+   up, and transported between hosts.
++
+'''
+** Using virtual machines enables you to build and test a multinode networked
+   service, for example. +
+** Issues with networking, operating system, and software configuration can be
+   investigated easily.
++
+'''
+** In addition to that, with the use of another Oracle VirtualBox feature
+   called snapshots, one can save a particular state of a virtual machine and
+   revert back to that state, if necessary.
+** This way, one can freely experiment with a computing environment.
+** If something goes wrong, such as problems after installing software or
+   infecting the guest with a virus, you can easily switch back to a previous
+   snapshot and avoid the need of frequent backups and restores.
++
+'''
+** Any number of snapshots can be created, allowing you to travel back and
+   forward in virtual machine time.
+** You can delete snapshots while a VM is running to reclaim disk space.
+
+Infrastructure consolidation.::
+* Virtualization can significantly reduce hardware and electricity costs.
+* Most of the time, computers today only use a fraction of their potential
+  power and run with low average system loads.
+* A lot of hardware resources as well as electricity is thereby wasted.
+* So, instead of running many such physical computers that are only partially
+  used, one can pack many virtual machines onto a few powerful hosts and
+  balance the loads between them.
+
+== 1.2 Some Terminology
+
+* When dealing with virtualization, and also for understanding the following
+  chapters of this documentation, it helps to acquaint yourself with some
+  important terminology, especially the following terms:
+Host operating system (host OS).::
+** This is the OS of the physical computer on which Oracle VirtualBox was
+   installed.
+** There are versions of Oracle VirtualBox for Windows, macOS, Linux, and
+   Oracle Solaris hosts.
++
+'''
+** Most of the time, this user guide discusses all Oracle VirtualBox versions
+   together.
+** There may be platform-specific differences which we will point out where
+   appropriate.
+
+Guest operating system (guest OS).::
+** This is the OS that is running inside the virtual machine.
+** Theoretically, Oracle VirtualBox can run any x86 OS such as DOS, Windows,
+   OS/2, FreeBSD, and OpenBSD on an x86 host.
+** But to achieve near-native performance of the guest code on your machine, we
+   had to go through a lot of optimizations that are specific to certain OSs.
+** So while your favorite OS may run as a guest, we officially support and
+   optimize for a select few, which include the most common OSs.
++
+'''
+* See _3.1 Guest Operating Systems_.
+
+Virtual machine (VM).::
+** This is the special environment that Oracle VirtualBox creates for your
+   guest OS while it is running.
+** In other words, you run your guest OS in a VM.
+** Normally, a VM is shown as a window on your computer's desktop.
+** Depending on which of the various frontends of Oracle VirtualBox you use, the
+   VM might be shown in full screen mode or remotely on another computer.
++
+'''
+** Internally, Oracle VirtualBox treats a VM as a set of parameters that specify
+   its behavior.
+** Some parameters describe hardware settings, such as the amount of memory and
+   number of CPUs assigned.
+** Other parameters describe the state information, such as whether the VM is
+   running or saved.
++
+'''
+** You can view these VM settings in VirtualBox Manager, in the Settings
+   window, and by running the VBoxManage command.
+** See _8 VBoxManage_.
+
+Guest Additions.::
+** This refers to special software packages which are shipped with Oracle
+   VirtualBox but designed to be installed inside a VM to improve performance
+   of the guest OS and to add extra features.
+** See _4 Guest Additions_.
+
+== 1.6 Starting Oracle VirtualBox
+
+* After installation, you can start Oracle VirtualBox as follows:
+Linux or Oracle Solaris hosts::
+** Depending on your desktop environment, an Oracle VirtualBox item may have
+   been placed in either the System or System Tools group of your Applications
+   menu.
+** Alternatively, you can enter VirtualBox in a terminal window.
+** When you start Oracle VirtualBox, the VirtualBox Manager interface is shown.
+** See _1.7 Configuring Oracle VirtualBox_.
+
+== 1.8 Adding Virtual Machines
+
+* If you want to create a completely new VM, click New and follow the steps in
+  _1.9 Creating a Virtual Machine_.
+* If you already have a VM saved on your machine, you can add it to the machine
+  list by clicking Add.
+* If you have a VM on a different machine, you can import it by clicking Import
+  Appliance.
+* See _1.15.2 Importing an Appliance in OVF Format_.
+* If you want to view an OCI instance from within VirtualBox Manager, see
+  _1.16.7.3 Adding a Cloud VM_.
+
+== 1.9 Creating a Virtual Machine
+
+* In the VirtualBox Manager window, click New.
+* The Create Virtual Machine workflow is shown, to guide you through the
+  required steps for setting up a new virtual machine (VM).
+
+'''
+
+* The steps are:
+** _1.9.1 Specify Name and Operating System_
+** _1.9.2 Configure Unattended Guest OS Install_
+** _1.9.3 Set Up VM Hardware_
+** _1.9.4 Specify a Virtual Hard Disk_
+
+'''
+ 
+* The exact settings on the workflow pages depend on the architecture of the
+  host platform.
+
+'''
+
+* If you don't see the workflow, change the experience level to Basic.
+* See _1.7.2 Experience Levels for VirtualBox Manager_.
+
+'''
+
+* Once created, the virtual machine is displayed in the machine list on the
+  left side of the VirtualBox Manager window, with the name that you entered on
+  the first page of the workflow.
+
+'''
+
+* You can change the settings later, after you have created the VM, using the
+  Machine Settings.
+
+'''
+
+* You must supply an operating system image, in ISO format, for the operating
+  system you intend to install on the VM.
+* Oracle VirtualBox does not supply the OS or any license required to use it.
+
+=== 1.9.1 Specify Name and Operating System
+
+1. Give the virtual machine (VM) a name.
+* The name you enter is shown in the machine list in VirtualBox Manager and is
+  also used for the virtual machine's files on disk.
+* Be sure to assign each VM an informative name that describes the OS and
+  software running on the VM.
+* For example, `Windows 10 with Visio`.
+* The name is also used to help Oracle VirtualBox suggest the appropriate OS
+  and related field contents automatically.
+
+2. Select the location where VMs are stored on your computer, called the
+   machine folder.
+* Ensure that the folder location has enough free space, especially if you
+  intend to use the snapshots feature.
+* See also _10.1.1 The Machine Folder_.
+
+3. Select the ISO image file for the operating system you intend to install on
+   the new VM.
+* The image file can be used directly to install an OS on the new VM as part of
+  an unattended installation, or it can be attached to a DVD drive on the new
+  VM.
+* If the image contains more than one edition, select the edition you want to
+  use.
+
+4. Oracle VirtualBox will populate the Type, Subtype, and Version fields if it
+   can detect the operating system in the ISO.
+* If it cannot detect the OS, then set these according to your OS.
+* For example, if the Type is Linux, the Subtype might be Oracle Linux and the
+  Version might be Oracle Linux 8.x (64-bit).
+* The options available for the guest OS are also limited by the host
+  architecture.
+* See _3.1 Guest Operating Systems_ for more information.
++
+'''
+
+* The supported OSs are grouped into types.
+* If you want to install something very unusual that is not listed, select the
+  Other type.
+* Depending on your selection, Oracle VirtualBox will enable or disable certain
+  VM settings that your guest OS may require.
+* This is particularly important for 64-bit guests (see _3.1.5 64-bit Guests
+  on) but you must always set this field to the correct value.
+
+5. By default, Oracle VirtualBox will install the chosen OS using the ISO image
+   provided, if the image supports unattended installation.
+* See also _1.9.2 Configure Unattended Guest OS Install_.
++
+'''
+
+* If you prefer to install the OS manually, you can disable the unattended
+  guest operating system install feature by selecting Skip Unattended
+  Installation.
+* In that case, the selected ISO image is mounted automatically on the DVD
+  drive of the new VM and you must install the OS from there.
+* Not all images support unattended installation.
+
+6. Click Next to _1.9.2 Configure Unattended Guest OS Install_ (if using) or to
+   _1.9.3 Set Up VM Hardware_.
+
+=== 1.9.2 Configure Unattended Guest OS Install
+
+* If you choose Unattended guest OS Installation, Oracle VirtualBox installs
+  the OS on the new virtual machine (VM) automatically.
+* You must supply certain configuration options to be used in the installation.
+* See also _3.2.1 Using VBoxManage Commands for Unattended Guest Installation_
+  for details of how to configure unattended installation from the command
+  line.
+
+[NOTE]
+====
+* You will not see these options if you selected the Skip Unattended
+  Installation option.
+====
+
+1. Enter the *Username and Password* for a default user on the guest OS.
+2. For Windows guests, enter the *Product Key* supplied with Windows.
+3. Enter the *Hostname* for the VM. +
+   By default, this is the same as the VM name.
+4. Enter the *Domain Name* for the VM.
+5. Select *Install in Background* if you want to enable headless mode for the
+   VM rather than using a graphical user interface.
+6. Unattended Guest Additions installation is available for some x86 guests. +
+   Select Guest Additions if you would like Oracle VirtualBox to install the
+   Guest Additions after the OS. +
+   Download the Guest Additions installation ISO to the host, and select the
+   file location. +
+7. Click Next to _1.9.3 Set Up VM Hardware_
+
+=== 1.9.3 Set Up VM Hardware
+
+1. For *Base Memory*, select the amount of RAM that Oracle VirtualBox should
+   allocate to the virtual machine (VM) every time it is started.
+* The guest OS will report this size as the VM's installed RAM.
++
+'''
++
+[CAUTION]
+====
+* Choose this setting carefully.
+* The memory you give to the VM will not be available to your host OS while the
+  VM is running.
+====
++
+* Do not specify more than you can spare, whilst ensuring you allocate enough
+  for your guest OS and applications to run properly.
+* For example, if your host machine has 4 GB of RAM and you enter 2048 MB as
+  the base memory for a VM, you will have 2 GB left for all the other software
+  on your host while that VM is running.
++
+'''
++
+* A guest OS may require at least 1 or 2 GB of memory to install and boot up.
+* If you intend to run more than one VM at a time, plan accordingly.
+* A VM will not start if it does not have enough RAM to boot.
++
+'''
+
+* Always ensure that the host OS has enough RAM remaining.
+* If insufficient RAM remains, the system might excessively swap memory to the
+  hard disk, which will effectively bring the host system to a standstill.
+
+2. For *Processor(s)*, select the number of virtual processors to assign to the
+   VM.
+* Do not assign more than half of the total processor threads from the host
+  machine.
+
+3. Select *Enable EFI* if you want to enable Extensible Firmware Interface (EFI)
+   booting for the guest OS.
+4. Click Next to _1.9.4 Specify a Virtual Hard Disk_.
+
+=== 1.9.4 Specify a Virtual Hard Disk
+
+* There are many ways in which Oracle VirtualBox can provide hard disk space
+  to a VM, see _5 Virtual Storage_.
+
+'''
+
+* The most common way is to use a virtual hard disk.
+* This is a large image file on your physical hard disk, whose contents Oracle
+  VirtualBox presents to your VM as if it were a complete hard disk.
+* You can copy this file to another host, and use it with another Oracle
+  VirtualBox VM.
+
+'''
+
+[NOTE]
+====
+* If you choose *Do Not Add a Virtual Hard Disk* at this stage you will need to
+  attach a hard disk using VirtualBox Manager or VBoxManage commands before
+  you can install a guest operating system.
+====
+
+==== Create a Virtual Hard Disk
+
+* Follow these steps to create a virtual hard disk to use with this VM.
+* To prevent your physical hard disk on the host OS from filling up, Oracle
+  VirtualBox limits the size of the image file.
+* But the image file must be large enough to hold the contents of the guest OS
+  and the applications you want to install.
+* For a Windows or Linux guest, you will probably need several gigabytes for
+  any serious use.
+* The limit of the image file size can be changed later, see _8.33 VBoxManage
+  modifymedium_.
+
+1. Select *Create a Virtual Hard Disk Now*.
+** This creates a new empty virtual hard disk image, located in the VM's
+   machine folder.
+2. Enter the following settings:
+Disk Size.::
+** Use the slider to select a maximum size for the hard disk in the new VM.
+Pre-Allocate Full Size.::
+** This setting determines the type of image file used for the disk image.
+** Select this setting to use a fixed-size file for the disk image.
+** Otherwise, Oracle VirtualBox will use a dynamically allocated file for the
+   disk image.
+'''
+
+* The different types of image file behave as follows:
+Dynamically allocated file.::
+* This type of image file only grows in size when the guest actually stores
+  data on its virtual hard disk.
+* Therefore, this file is small initially.
+* As the drive is filled with data, the file grows to the specified size.
+Fixed-size file.::
+* This type of image file immediately occupies the file specified, even if
+  only a fraction of that virtual hard disk space is actually in use.
+* While occupying much more space, a fixed-size file incurs less overhead and
+  is therefore slightly faster than a dynamically allocated file.
+
+* For more details about the differences, see _5.2 Disk Image Files (VDI,
+  VMDK, VHD, HDD)_.
+
+==== Use an Existing Virtual Hard Disk
+
+* Follow these steps to use a virtual hard disk that already exists on the
+  host.
+* Ensure the image file is in a suitable location (usually the machine folder)
+  and not in use by other VMs.
+
+[CAUTION]
+====
+* Data on the disk image may be deleted.
+====
+
+1. Select *Use an Existing Virtual Hard Disk File*
+2. Select the image file to use with the new VM, and then click *Add*.
+
+== 1.10 Running a Virtual Machine
+
+* To start a virtual machine (VM), you have the following options:
+** Double-click the VM's name in the machine list in VirtualBox Manager.
+** Select the VM's name in the machine list in VirtualBox Manager, and click
+   *Start* in the toolbar the top of the window.
+** Go to the VirtualBox VMs folder in your system user's home directory.
+   +
+   Find the subdirectory of the machine you want to start and double-click the
+   machine settings file. +
+   This file has a `.vbox` file extension.
+
+'''
+
+* The VM you started appears in a new window and you will see it start to boot
+  up, or prompt you to install an operating system as required.
+* Everything that would normally be seen on the virtual system's monitor is
+  shown in the window.
+
+'''
+
+* In general, you can use the virtual machine as you would use a real
+  computer.
+* The following topics describe a few points to note when running a VM.
+
+=== 1.10.1 Starting a New VM for the First Time
+
+* When you start a VM for the first time the OS installation process is
+  started automatically, using the ISO image file specified in the *Create
+  Virtual Machine* workflow.
+
+'''
+
+* Follow the onscreen instructions to install your OS.
