@@ -1,0 +1,41 @@
+= Oracle VirtualBox: User Guide for Release 7.1
+
+== Preface
+
+* This document provides information on the advanced features of Oracle
+  VirtualBox.
+
+=== Audience
+
+* This document is intended for administrators with previous experience of
+  using Oracle VirtualBox.
+* It is assumed that readers are familiar with Web technologies and have a
+  general understanding of Windows and UNIX platforms.
+
+=== Related Documents
+
+* The documentation for this product is available at:
+  https://docs.oracle.com/en/virtualization/virtualbox/index.html
+
+=== Conventions
+
+* The following text conventions are used in this document:
+
+'''
+
+* This table summarizes conventions used in this document.
+
+[%autowidth]
+|===
+|Convention	|Meaning
+
+|*boldface*	|
+Boldface type indicates graphical user interface elements associated with an
+action, or terms defined in text or the glossary.
+|_italic_	|
+Italic type indicates book titles, emphasis, or placeholder variables for which
+you supply particular values.
+|`monospace`|
+Monospace type indicates commands within a paragraph, URLs, code in examples,
+text that appears on the screen, or text that you enter.
+|===
