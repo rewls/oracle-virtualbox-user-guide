@@ -1,0 +1,50 @@
+= Chapter 3 Configuring Virtual Machines
+
+* This chapter provides detailed steps for configuring an Oracle VM VirtualBox
+  virtual machine (VM).
+* For an introduction to Oracle VM VirtualBox and steps to get your first
+  virtual machine running, see Chapter 1, _First Steps_.
+
+'''
+
+* You have considerable latitude when deciding what virtual hardware to
+  provide to the guest.
+* Use virtual hardware to communicate with the host system or with other
+  guests.
+* For example, you can use virtual hardware in the following ways:
+** Have Oracle VM VirtualBox present an ISO CD-ROM image to a guest system as
+   if it were a physical CD-ROM.
+** Provide a guest system access to the physical network through its virtual
+   network card.
+** Provide the host system, other guests, and computers on the Internet access
+   to the guest system.
+
+== 3.9. Network Settings
+
+* The Network section in a virtual machine's Settings window enables you to
+  configure how Oracle VM VirtualBox presents virtual network cards to your
+  VM, and how they operate.
+
+'''
+
+* When you first create a virtual machine, Oracle VM VirtualBox by default
+  enables one virtual network card and selects the Network Address Translation
+  (NAT) mode for it.
+* This way the guest can connect to the outside world using the host's
+  networking and the outside world can connect to services on the guest which
+  you choose to make visible outside of the virtual machine.
+
+'''
+
+* This default setup is good for the majority of Oracle VM VirtualBox users.
+* However, Oracle VM VirtualBox is extremely flexible in how it can virtualize
+  networking.
+* It supports many virtual network cards per virtual machine.
+* The first four virtual network cards can be configured in detail in the
+  VirtualBox Manager window.
+* Additional network cards can be configured using the *VBoxManage* command.
+
+'''
+
+* Many networking options are available.
+* See Chapter 6, _Virtual Networking_ for more information.
