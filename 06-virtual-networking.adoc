@@ -1,0 +1,110 @@
+= Chapter 6 Virtual Networking
+:experimental:
+
+* As mentioned in Section 3.9, “Network Settings”, Oracle VM VirtualBox
+  provides up to eight virtual PCI Ethernet cards for each virtual machine.
+* For each such card, you can individually select the following:
+** The hardware that will be virtualized.
+** The virtualization mode that the virtual card operates in, with respect to
+   your physical networking hardware on the host.
+
+* Four of the network cards can be configured in the menu:Network[] section of the
+  menu:Settings[] dialog in the graphical user interface of Oracle VM VirtualBox.
+* You can configure all eight network cards on the command line using
+  *VBoxManage modifyvm*.
+* See Section 7.8, “VBoxManage modifyvm”.
+
+'''
+
+* This chapter explains the various networking settings in more detail.
+
+== 6.2. Introduction to Networking Modes
+
+* Each of the networking adapters can be separately configured to operate in
+  one of the following modes:
+
+'''
+
+Not attached.::
+* In this mode, Oracle VM VirtualBox reports to the guest that a network card
+  is present, but that there is no connection.
+* This is as if no Ethernet cable was plugged into the card.
+* Using this mode, it is possible to pull the virtual Ethernet cable and
+  disrupt the connection, which can be useful to inform a guest operating
+  system that no network connection is available and enforce a reconfiguration.
+
+Network Address Translation (NAT).::
+* If all you want is to browse the Web, download files, and view email inside
+  the guest, then this default mode should be sufficient for you, and you can
+  skip the rest of this section.
+* Please note that there are certain limitations when using Windows file
+  sharing.
+* See Section 6.3.3, "NAT Limitations".
+
+NAT Network.::
+* A NAT network is a type of internal network that allows outbound
+  connections.
+* See Section 6.4, "Network Address Translation Service".
+
+Bridged networking.::
+* This is for more advanced networking needs, such as network simulations and
+  running servers in a guest.
+* When enabled, Oracle VM VirtualBox connects to one of your installed network
+  cards and exchanges network packets directly, circumventing your host
+  operating system's network stack.
+
+Internal networking.::
+* This can be used to create a different kind of software-based network which
+  is visible to selected virtual machines, but not to applications running on
+  the host or to the outside world.
+
+Host-only networking.::
+* This can be used to create a network containing the host and a set of
+  virtual machines, without the need for the host's physical network
+  interface.
+* Instead, a virtual network interface, similar to a loopback interface, is
+  created on the host, providing connectivity among virtual machines and the
+  host.
+
+Generic networking.::
+* Rarely used modes which share the same generic network interface, by
+  allowing the user to select a driver which can be included with Oracle VM
+  VirtualBox or be distributed in an extension pack.
+
+* The following sub-modes are available:
+UDP Tunnel::
+* Used to interconnect virtual machines running on different hosts directly,
+  easily, and transparently, over an existing network infrastructure.
+
+VDE (Virtual Distributed Ethernet) networking::
+* Used to connect to a Virtual Distributed Ethernet switch on a Linux or a
+  FreeBSD host.
+* At the moment this option requires compilation of Oracle VM VirtualBox from
+  sources, as the Oracle packages do not include it.
+
+* The following table provides an overview of the most important networking
+  modes.
+
+.Table 6.1 Overview of Networking Modes
+[%autowidth%header,cols="6*"]
+|===
+|Mode		|VM->Host	|VM<-Host	|VM1<-->VM2	|VM->Net/LAN
+|VM<-Net/LAN
+
+|Host-only	|+		|+		|+		|-
+|-
+
+|Internal	|-		|-		|+		|-
+|-
+
+|Bridged	|+		|+		|+		|+
+|+
+
+|NAT		|+		|Port forward	|-		|+
+|Port forward
+
+|NATservice	|+		|Port forward	|+		|+
+|Port forward
+|===
+
+* The following sections describe the available network modes in more detail.
