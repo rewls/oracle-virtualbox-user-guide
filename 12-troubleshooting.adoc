@@ -1,0 +1,36 @@
+= 12 Troubleshooting
+:toc: left
+
+* This chapter provides answers to commonly asked questions.
+* In order to improve your user experience with Oracle VirtualBox, it is
+  recommended to read this section to learn more about common pitfalls and get
+  recommendations on how to use the product.
+
+== 12.2 General Troubleshooting
+
+=== 12.2.1 Guest Shows IDE/SATA Errors for File-Based Images on Slow Host File System
+
+* Occasionally, some host file systems provide very poor writing performance
+  and as a consequence cause the guest to time out IDE/SATA commands.
+* This is normal behavior and should normally cause no real problems, as the
+  guest should repeat commands that have timed out.
+* However, guests such as some Linux versions have severe problems if a write
+  to an image file takes longer than about 15 seconds.
+* Some file systems however require more than a minute to complete a single
+  write, if the host cache contains a large amount of data that needs to be
+  written.
+
+'''
+
+* The symptom for this problem is that the guest can no longer access its
+  files during large write or copying operations, usually leading to an
+  immediate hang of the guest.
+
+'''
+
+* In order to work around this problem, the true fix is to use a faster file
+  system that does not exhibit such unacceptable write performance, it is
+  possible to flush the image file after a certain amount of data has been
+  written.
+* This interval is normally infinite, but can be configured individually for
+  each disk of a VM.
